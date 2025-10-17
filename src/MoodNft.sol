@@ -5,9 +5,10 @@ import {ERC721} from "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import {Base64} from "@openzeppelin/contracts/utils/Base64.sol";
 
 contract MoodNft is ERC721 {
-    //errors
+    //ERRORS
     error MoodNft__CantFlipMoodIfNotOwner();
 
+    //STATE VARIABLES
     uint256 private s_tokenCounter;
     string private s_sadSvgImageUri;
     string private s_happySvgImageUri;
@@ -16,6 +17,7 @@ contract MoodNft is ERC721 {
         HAPPY,
         SAD
     }
+    //MAPPINGS
 
     mapping(uint256 => Mood) private s_tokenIdToMood;
 
@@ -26,14 +28,13 @@ contract MoodNft is ERC721 {
 
     function mintNft() public {
         _safeMint(msg.sender, s_tokenCounter);
-        s_tokenIdToMood[s_tokenCounter] = Mood.HAPPY; //default mood is happy
+        s_tokenIdToMood[s_tokenCounter] = Mood.HAPPY; //Default mood is happy
         s_tokenCounter++;
     }
 
     function flipMood(uint256 tokenId) public {
-        if (getApproved(tokenId) != msg.sender && ownerOf(tokenId) != msg.sender) {
-            //checks if msg.sender is owner or approved
-            revert MoodNft__CantFlipMoodIfNotOwner();
+       if (getApproved(tokenId) != msg.sender && ownerOf(tokenId) != msg.sender){ //Checks if msg.sender is owner or approved // get approved is the new function in openzeppelin that checks if the msg.sender is approved to make changes to that tokenId, it used to be isApprovedOrOwner..
+        revert MoodNft__CantFlipMoodIfNotOwner();
         }
         if (s_tokenIdToMood[tokenId] == Mood.HAPPY) {
             s_tokenIdToMood[tokenId] = Mood.SAD;
@@ -43,7 +44,7 @@ contract MoodNft is ERC721 {
     }
 
     function _baseURI() internal pure override returns (string memory) {
-        return "data:application/json;base64,";
+        return "data:application/json;base64,";  //Base URI for json data in base64 format
     }
 
     function tokenURI(uint256 tokenId) public view override returns (string memory) {

@@ -1,66 +1,68 @@
-## Foundry
+NFT Projects — BasicNft & MoodNft
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+This repository contains two simple NFT smart contracts I built while learning Solidity and on-chain metadata.
+Both are small experimental projects created as part of my early practice with NFTs.
 
-Foundry consists of:
+Overview
+1. BasicNft.sol
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+A straightforward NFT contract that mints a Dog NFT.
+It focuses on the fundamentals of ERC-721: minting, ownership, and metadata handling.
 
-## Documentation
+Key features:
 
-https://book.getfoundry.sh/
+Standard ERC-721 implementation
 
-## Usage
+Stores metadata URI for each token
 
-### Build
+Basic minting logic
 
-```shell
-$ forge build
-```
+2. MoodNft.sol
 
-### Test
+An on-chain SVG NFT that changes its displayed image (mood) between happy and sad.
+The images are stored directly on-chain as Base64-encoded SVGs, making the NFT fully self-contained.
 
-```shell
-$ forge test
-```
+Key features:
 
-### Format
+Dynamic SVG rendering using Base64 encoding
 
-```shell
-$ forge fmt
-```
+Two mood states: Happy and Sad
 
-### Gas Snapshots
+On-chain metadata — no external files or IPFS
 
-```shell
-$ forge snapshot
-```
+Function to toggle the mood
 
-### Anvil
+Tech Stack:
 
-```shell
-$ anvil
-```
+Solidity
 
-### Deploy
+Foundry (for compilation and deployment)
 
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
+Base64 encoding for SVGs
 
-### Cast
+Notes
 
-```shell
-$ cast <subcommand>
-```
+This was a trial project, one of my first few Solidity projects.
 
-### Help
+No major tests have been written yet.
 
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+The contracts are not production-ready, they were made to understand how NFTs, metadata, and on-chain SVGs work.
+
+Future Improvements:
+
+Add Foundry tests for both contracts
+
+Integrate a small frontend to visualize MoodNft changes
+
+Extend MoodNft with more moods or traits
+
+Store BasicNft metadata on IPFS or Arweave
+
+License
+
+MIT License
+
+Author
+
+rudr77
+Learning Web3 Development and Smart Contract Security
